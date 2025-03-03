@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { API } from '../config/API';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const [jobs, setJobs] = useState([]);
@@ -24,7 +25,13 @@ const Home = () => {
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     return diffDays > 0 ? `${diffDays} days left` : "Application closed";
   };
+  const applyJob = async (jobId) => {
+    console.log(jobId);
+    let res = await API.post("/applications", { jobId: jobId })
+    console.log(res);
 
+  }
+  const nav = useNavigate()
   return (
     <div className="container mt-4">
       <h2>Job Listings</h2>
@@ -42,7 +49,8 @@ const Home = () => {
                 <p>{job.desc}</p>
                 <p><strong>End Date:</strong> {new Date(job.endDate).toLocaleDateString()}</p>
                 <p><strong>Time Left:</strong> {calculateDaysLeft(job.endDate)}</p>
-                <button className="btn btn-primary">Apply</button>
+                <button className="btn btn-primary" onClick={() => applyJob(job._id)}>Apply</button>
+                <button className="btn btn-info" onClick={() => nav(`/job/${job._id}`)}>view </button>
               </div>
             </div>
           ))}
