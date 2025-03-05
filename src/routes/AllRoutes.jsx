@@ -8,6 +8,7 @@ import Dashboard from '../pages/Dashboard'
 import PostJob from '../pages/Post-Job'
 import Company from '../pages/Company'
 import JobDetails from '../pages/JobDetails'
+import User from '../pages/User'
 
 const AllRoutes = () => {
     return (
@@ -20,6 +21,7 @@ const AllRoutes = () => {
             <Route path="/postJob" element={<PostJob />} />
             <Route path="/job/:id" element={<JobDetails />} />
             <Route path='/company' element={<Company />} />
+            <Route path='/job/:jobId/user/:id' element={<User />} />
         </Routes>
     )
 }
