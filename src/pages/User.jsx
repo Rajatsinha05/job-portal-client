@@ -18,9 +18,11 @@ const UserDetails = () => {
         }
     };
 
-    const updateAppliedStatus = async () => {
+    const updateAppliedStatus = async (value) => {
+        console.log(value);
+        
         try {
-            let res = await API.patch(`/applications/${jobId}`, { status: statusOptions })
+            let res = await API.patch(`/applications/${jobId}`, { status: value })
             console.log(res);
 
         } catch (error) {
@@ -30,7 +32,7 @@ const UserDetails = () => {
     }
     const handleStatusChange = (e) => {
         setStatus(e.target.value);
-        updateAppliedStatus()
+        updateAppliedStatus(e.target.value)
     };
 
     useEffect(() => {
